@@ -40,6 +40,10 @@
     "applicationInsightsName": {
       "type": "string",
       "defaultValue": "[parameters('appName')]"
+    },
+    "runtimeVersion": {
+      "type": "string",
+      "defaultValue": "~2"
     }
   },
   "variables": {
@@ -110,7 +114,7 @@
             },
             {
               "name": "FUNCTIONS_EXTENSION_VERSION",
-              "value": "~2"
+              "value": "[parameters('runtimeVersion')]"
             },
             {
               "name": "WEBSITE_NODE_DEFAULT_VERSION",
