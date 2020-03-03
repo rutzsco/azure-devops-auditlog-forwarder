@@ -1,0 +1,31 @@
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Build project'
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '--output publish_output --configuration Release'
+- task: DotNetCoreCLI@2
+  displayName: 'Publish project'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: '**/*.csproj'
+    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: App'
+  inputs:
+    ArtifactName: App
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Infrastructure'
+  inputs:
+    PathtoPublish: Infrastructure
+    ArtifactName: Infrastructure
