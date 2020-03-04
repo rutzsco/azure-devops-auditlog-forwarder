@@ -13,7 +13,7 @@ namespace DevOpsAuditLogForwarder
     {
         [FunctionName("DevOpsAuditLogForwarderActivity")]
         public async static void Run([TimerTrigger("0 */5 * * * *", RunOnStartup = true)]TimerInfo myTimer, 
-                                     [EventHub("siem", Connection = "EventHubConnectionString")]IAsyncCollector<string> outputEvents, ExecutionContext context, ILogger log)
+                                     [EventHub("audit-logs-devops-lolinc", Connection = "EventHubConnectionString")]IAsyncCollector<string> outputEvents, ExecutionContext context, ILogger log)
         {
             
 
