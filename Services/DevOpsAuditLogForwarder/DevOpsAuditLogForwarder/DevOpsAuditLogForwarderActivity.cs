@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
@@ -12,7 +13,7 @@ namespace DevOpsAuditLogForwarder
     public static class DevOpsAuditLogForwarderActivity
     {
         [FunctionName("DevOpsAuditLogForwarderActivity")]
-        public async static void Run([TimerTrigger("0 */5 * * * *", RunOnStartup = true)]TimerInfo myTimer, 
+        public async static Task Run([TimerTrigger("0 */5 * * * *", RunOnStartup = true)]TimerInfo myTimer, 
                                      [EventHub("audit-logs-devops-lolinc", Connection = "EventHubConnectionString")]IAsyncCollector<string> outputEvents, ExecutionContext context, ILogger log)
         {
             
